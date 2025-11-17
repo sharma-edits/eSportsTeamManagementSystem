@@ -1,0 +1,22 @@
+{
+  "name": "esports-team-management-system",
+  "version": "1.0.0",
+  "description": "A web application for managing eSports teams, players, and tournaments",
+  "main": "index.js",
+  "scripts": {
+    "build": "mvn clean package",
+    "firebase:deploy": "npx firebase-tools deploy --only hosting --token $FIREBASE_TOKEN"
+  },
+  "keywords": [
+    "esports",
+    "team",
+    "management",
+    "tournaments",
+    "players"
+  ],
+  "author": "Ayush Sharma",
+  "license": "MIT",
+  "devDependencies": {
+    "firebase-tools": "^13.0.0"
+  }
+}

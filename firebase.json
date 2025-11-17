@@ -1,0 +1,19 @@
+{
+  "hosting": {
+    "public": "target/eSportsTeamManagementSystem",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "src/**",
+      "pom.xml",
+      "README.md"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.jsp"
+      }
+    ]
+  }
+}

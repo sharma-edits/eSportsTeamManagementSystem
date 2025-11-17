@@ -1,18 +1,41 @@
 {
   "hosting": {
-    "public": "target/eSportsTeamManagementSystem",
+    "public": "public",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**",
       "src/**",
+      "target/**",
       "pom.xml",
-      "README.md"
+      "*.md",
+      ".git/**",
+      ".github/**"
     ],
     "rewrites": [
       {
         "source": "**",
-        "destination": "/index.jsp"
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(html|json)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=3600"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(js|css)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=31536000"
+          }
+        ]
       }
     ]
   }

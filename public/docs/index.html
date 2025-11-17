@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - eSports Team Management System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #00ff88;
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        h1, h2, h3 {
+            text-shadow: 0 0 10px #00ff88;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 36px;
+            border-bottom: 2px solid #00ff88;
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #00d9ff;
+        }
+
+        h3 {
+            font-size: 18px;
+            color: #00ff88;
+        }
+
+        p {
+            color: #00d9ff;
+            margin-bottom: 15px;
+        }
+
+        code {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid #00ff88;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #00ff88;
+        }
+
+        pre {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #00ff88;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        pre code {
+            background: none;
+            border: none;
+            padding: 0;
+            color: #00ff88;
+        }
+
+        .section {
+            background: rgba(0, 255, 136, 0.05);
+            border-left: 4px solid #00ff88;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 4px;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            color: #00d9ff;
+        }
+
+        a {
+            color: #00ff88;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            color: #00ff88;
+            text-decoration: none;
+            margin-bottom: 30px;
+            display: inline-block;
+        }
+
+        .back-link:hover {
+            text-shadow: 0 0 10px #00ff88;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #00ff88;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+        }
+
+        td {
+            color: #00d9ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← Back to Home</a>
+
+        <h1>eSports Team Management System - Documentation</h1>
+
+        <div class="section">
+            <h2>Overview</h2>
+            <p>A professional web application for managing eSports teams, players, tournaments, and matches.</p>
+            <p><strong>Version:</strong> 1.0.0</p>
+            <p><strong>Technology Stack:</strong> Java 17, Jakarta Servlet, JSP, MySQL, Apache Tomcat 10</p>
+        </div>
+
+        <div class="section">
+            <h2>Prerequisites</h2>
+            <ul>
+                <li>Java Development Kit (JDK) 17</li>
+                <li>Apache Tomcat 10</li>
+                <li>MySQL 8.0 or higher</li>
+                <li>Maven 3.6 or higher</li>
+                <li>NetBeans IDE (optional)</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Database Setup</h2>
+            <h3>Option A: Using MySQL CLI</h3>
+            <pre><code>mysql -u root -p &lt; src/main/resources/database.sql</code></pre>
+
+            <h3>Option B: Using XAMPP phpMyAdmin</h3>
+            <ol>
+                <li>Start XAMPP MySQL service</li>
+                <li>Open phpMyAdmin (http://localhost/phpmyadmin)</li>
+                <li>Click "Import" tab</li>
+                <li>Upload <code>src/main/resources/database.sql</code></li>
+                <li>Click Import</li>
+            </ol>
+
+            <h3>Option C: Using MySQL Workbench</h3>
+            <ol>
+                <li>Open MySQL Workbench</li>
+                <li>Create new connection or use existing</li>
+                <li>File → Run SQL Script</li>
+                <li>Select <code>src/main/resources/database.sql</code></li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>Configuration</h2>
+            <h3>Database Connection (app.properties)</h3>
+            <pre><code># For MySQL with user/password
+db.url=jdbc:mysql://localhost:3306/esports_db?useSSL=false&serverTimezone=UTC
+db.user=esports_user
+db.pass=Esports@2025
+
+# For XAMPP (root user, no password)
+db.url=jdbc:mysql://localhost:3306/esports_db?useSSL=false&serverTimezone=UTC
+db.user=root
+db.pass=</code></pre>
+        </div>
+
+        <div class="section">
+            <h2>Build Process</h2>
+            <h3>Step 1: Build with Maven</h3>
+            <pre><code>cd eSportsTeamManagementSystem
+mvn clean package</code></pre>
+            <p>This generates <code>target/eSportsTeamManagementSystem.war</code></p>
+
+            <h3>Step 2: Deploy to Tomcat</h3>
+            <ol>
+                <li>Copy <code>target/eSportsTeamManagementSystem.war</code> to <code>TOMCAT_HOME/webapps/</code></li>
+                <li>Restart Tomcat</li>
+                <li>Access application at: <code>http://localhost:8080/eSportsTeamManagementSystem</code></li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>Default Login Credentials</h2>
+            <table>
+                <tr>
+                    <th>Field</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td>Username</td>
+                    <td>AYUSH1234</td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td>Ayush@2908</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>admin@esports.com</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>URL Endpoints</h2>
+            <table>
+                <tr>
+                    <th>Page</th>
+                    <th>URL</th>
+                </tr>
+                <tr>
+                    <td>Home</td>
+                    <td>/</td>
+                </tr>
+                <tr>
+                    <td>Login</td>
+                    <td>/login</td>
+                </tr>
+                <tr>
+                    <td>Dashboard</td>
+                    <td>/dashboard</td>
+                </tr>
+                <tr>
+                    <td>Teams List</td>
+                    <td>/team?action=list</td>
+                </tr>
+                <tr>
+                    <td>New Team</td>
+                    <td>/team?action=form</td>
+                </tr>
+                <tr>
+                    <td>Players List</td>
+                    <td>/player?action=list</td>
+                </tr>
+                <tr>
+                    <td>Tournaments</td>
+                    <td>/tournament?action=list</td>
+                </tr>
+                <tr>
+                    <td>Matches</td>
+                    <td>/match?action=list</td>
+                </tr>
+                <tr>
+                    <td>Logout</td>
+                    <td>/logout</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Project Structure</h2>
+            <pre><code>eSportsTeamManagementSystem/
+├── src/
+│   ├── main/
+│   │   ├── java/com/esports/
+│   │   │   ├── dao/          # Data Access Objects
+│   │   │   ├── model/        # Model/Entity classes
+│   │   │   └── web/          # Servlet controllers
+│   │   ├── webapp/
+│   │   │   ├── index.jsp
+│   │   │   ├── login.jsp
+│   │   │   ├── css/
+│   │   │   └── WEB-INF/
+│   │   └── resources/
+│   │       ├── app.properties
+│   │       └── database.sql
+├── target/                    # Compiled WAR file
+├── pom.xml                    # Maven configuration
+└── README.md</code></pre>
+        </div>
+
+        <div class="section">
+            <h2>Security Features</h2>
+            <ul>
+                <li>Password-based authentication</li>
+                <li>Session management with timeout</li>
+                <li>HTTP-only cookies</li>
+                <li>Input validation on forms</li>
+                <li>SQL parameterized queries (preventing SQL injection)</li>
+                <li>Protected admin pages requiring login</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Troubleshooting</h2>
+            <h3>Connection refused to database</h3>
+            <p><strong>Solution:</strong> Ensure MySQL is running and credentials in <code>app.properties</code> are correct</p>
+
+            <h3>Tomcat can't find MySQL driver</h3>
+            <p><strong>Solution:</strong> Maven should handle this; run <code>mvn clean package</code> again</p>
+
+            <h3>JSP pages show 404 error</h3>
+            <p><strong>Solution:</strong> Ensure WAR file is deployed in <code>TOMCAT_HOME/webapps/</code> and Tomcat is restarted</p>
+
+            <h3>Login fails with correct credentials</h3>
+            <p><strong>Solution:</strong> Check <code>esports_db</code> exists and contains <code>admins</code> table with data</p>
+        </div>
+
+        <div class="section">
+            <h2>Additional Resources</h2>
+            <ul>
+                <li><a href="https://jakarta.ee/">Jakarta EE Documentation</a></li>
+                <li><a href="https://tomcat.apache.org/tomcat-10.0-doc/">Apache Tomcat 10 Documentation</a></li>
+                <li><a href="https://dev.mysql.com/doc/">MySQL Documentation</a></li>
+                <li><a href="https://maven.apache.org/guides/">Maven Documentation</a></li>
+            </ul>
+        </div>
+
+        <div style="margin-top: 50px; text-align: center; color: #00d9ff;">
+            <p>Version 1.0.0 | Last Updated November 2025</p>
+        </div>
+    </div>
+</body>
+</html>

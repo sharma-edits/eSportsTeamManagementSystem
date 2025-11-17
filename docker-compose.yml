@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  db:
+    image: mysql:8.0
+    container_name: esports_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: esports_db
+      MYSQL_USER: esports_user
+      MYSQL_PASSWORD: Esports@2025
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./src/main/resources/database.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Tomcat Application Server
+  app:
+    build: .
+    container_name: esports_app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: esports_db
+      DB_USER: esports_user
+      DB_PASSWORD: Esports@2025
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./logs:/usr/local/tomcat/logs
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+    driver: local
